@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>残星晓月 - Góc Truyện</title>
+    <title>残星晓月</title>
     
     <!-- Nhúng Font chữ Tiểu thuyết từ Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -169,7 +169,7 @@
             </div>
         </div>
 
-        <!-- MỤC 2: TRUYỆN GAY -->
+        <!-- MỤC 2: TRUYỆN Gây -->
         <div class="category-section">
             <h2 class="category-title">Truyện gay</h2>
             <div class="grid-container">
@@ -188,7 +188,7 @@
                     <div class="card-content">
                         <div class="meta-tag">Đang Edit</div>
                         <h3 class="story-title">Át Bích - Tần Tam Kiến</h3>
-                        <p class="story-desc">Giới thiệu: Niên hạ | Cả anh trai lẫn em trai đều chẳng phải dạng vừa đâu.</p>
+                        <p class="story-desc">Giới thiệu: Niên hạ.</p>
                         <hr class="divider">
                         <a href="#"><button class="btn-read">Đọc Ngay</button></a>
                     </div>

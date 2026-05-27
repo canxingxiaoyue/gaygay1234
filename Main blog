@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>残星晓月 - Góc Truyện</title>
+    
+    <!-- Nhúng Font chữ Tiểu thuyết từ Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* MÀU SẮC CHỦ ĐẠO */
+        :root {
+            --bg-color: #f7f4ed;       /* Trắng kem nền */
+            --text-main: #2b3a2e;      /* Xanh rêu đậm cho tiêu đề */
+            --text-sub: #555555;       /* Xám cho văn bản phụ */
+            --btn-color: #8c6239;      /* Nâu gỗ cho nút bấm */
+            --btn-hover: #6e4c2b;      /* Nâu đậm khi di chuột */
+            --card-bg: #fefdfa;        /* Trắng ngà cho nền thẻ truyện */
+            --divider: #e0dcd2;        /* Màu xám nhạt cho vạch kẻ */
+        }
+
+        /* CÀI ĐẶT CƠ BẢN */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            font-family: 'Lora', serif; 
+            line-height: 1.5;
+        }
+        h1, h2, h3, .logo { 
+            font-family: 'Playfair Display', serif; 
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* HEADER */
+        header { padding: 30px 50px; text-align: center; }
+        .logo { font-size: 32px; letter-spacing: 2px; color: var(--text-main); }
+        .nav-links { margin-top: 15px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+        .nav-links a { margin: 0 15px; color: var(--text-sub); transition: 0.3s; }
+        .nav-links a:hover { color: var(--text-main); }
+
+        /* KHUNG CHỨA NỘI DUNG */
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        /* DANH MỤC TRUYỆN */
+        .category-section { margin-bottom: 60px; }
+        .category-title { 
+            font-size: 26px; 
+            margin-bottom: 25px; 
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        /* LƯỚI HIỂN THỊ TRUYỆN */
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 40px; 
+        }
+
+        /* THẺ TRUYỆN */
+        .story-card {
+            background-color: var(--card-bg);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
+        }
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+        .story-card img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            display: block;
+        }
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .meta-tag {
+            font-family: sans-serif;
+            font-size: 10px;
+            color: #888;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .story-title {
+            font-size: 20px;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+        .story-desc {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+        .divider {
+            border: none;
+            border-top: 1px solid var(--divider);
+            margin-bottom: 20px;
+        }
+        .btn-read {
+            display: inline-block;
+            background-color: var(--btn-color);
+            color: white;
+            font-family: sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            width: fit-content;
+        }
+        .btn-read:hover {
+            background-color: var(--btn-hover);
+        }
+        .coming-soon-text {
+            font-size: 14px;
+            color: var(--text-sub);
+            font-style: italic;
+        }
+        @media (max-width: 600px) {
+            .grid-container { grid-template-columns: 1fr; }
+            .story-card img { height: auto; aspect-ratio: 2/3; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="logo">残星晓月</h1>
+        <div class="nav-links">
+            <a href="index.html">Trang Chủ</a>
+            <a href="#">Danh Sách Truyện</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- MỤC 1: TRUYỆN NAM CHỦ -->
+        <div class="category-section">
+            <h2 class="category-title">Truyện nam chủ</h2>
+            <div class="grid-container">
+                <div class="story-card">
+                    <img src="https://i.pinimg.com/736x/21/df/b8/21dfb85f2f5fc2dc88cd0a894a413d78.jpg" alt="Bìa truyện">
+                    <div class="card-content">
+                        <div class="meta-tag">Đang Edit</div>
+                        <h3 class="story-title">Vòng Tròn Định Mệnh - Mực Thích Lặn Nước</h3>
+                        <p class="story-desc">Năm 1988, cuối tháng Bảy, sắc đỏ thẫm sẽ từ trên trời giáng xuống.</p>
+                        <hr class="divider">
+                        <!-- ĐÃ LIÊN KẾT THẲNG ĐẾN FILE MỤC LỤC BẠN VỪA TẠO -->
+                        <a href="vong-tron-dinh-menh.html"><button class="btn-read">Đọc Ngay</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MỤC 2: TRUYỆN GAY -->
+        <div class="category-section">
+            <h2 class="category-title">Truyện gay</h2>
+            <div class="grid-container">
+                <div class="story-card">
+                    <img src="https://i.pinimg.com/736x/8f/3e/16/8f3e16447c216c59bba6ed22d4f5d817.jpg" alt="Bìa truyện">
+                    <div class="card-content">
+                        <div class="meta-tag">Đang Edit</div>
+                        <h3 class="story-title">Đợi em thi đại học xong đã - Khoai Tây Ninh Nhừ</h3>
+                        <p class="story-desc">Lập ý: Học hành chăm chỉ, nghiêm túc thi đại học.</p>
+                        <hr class="divider">
+                        <a href="#"><button class="btn-read">Đọc Ngay</button></a>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="https://i.pinimg.com/736x/91/92/df/9192df4da69fbafc1483dc47f8baab4c.jpg" alt="Bìa truyện">
+                    <div class="card-content">
+                        <div class="meta-tag">Đang Edit</div>
+                        <h3 class="story-title">Át Bích - Tần Tam Kiến</h3>
+                        <p class="story-desc">Giới thiệu: Niên hạ | Cả anh trai lẫn em trai đều chẳng phải dạng vừa đâu.</p>
+                        <hr class="divider">
+                        <a href="#"><button class="btn-read">Đọc Ngay</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MỤC 3: FANFIC -->
+        <div class="category-section">
+            <h2 class="category-title">Fanfic</h2>
+            <p class="coming-soon-text">Sắp có</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

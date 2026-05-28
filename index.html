@@ -3,206 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>残星晓月</title>
+    <title>残星晓月 - Tàn tinh hiểu nguyệt</title>
     
-    <!-- Nhúng Font chữ Tiểu thuyết từ Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <!-- Nhúng Font chữ Serif sang trọng từ Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* MÀU SẮC CHỦ ĐẠO */
         :root {
-            --bg-color: #f7f4ed;       /* Trắng kem nền */
-            --text-main: #2b3a2e;      /* Xanh rêu đậm cho tiêu đề */
-            --text-sub: #555555;       /* Xám cho văn bản phụ */
-            --btn-color: #8c6239;      /* Nâu gỗ cho nút bấm */
-            --btn-hover: #6e4c2b;      /* Nâu đậm khi di chuột */
-            --card-bg: #fefdfa;        /* Trắng ngà cho nền thẻ truyện */
-            --divider: #e0dcd2;        /* Màu xám nhạt cho vạch kẻ */
+            --bg-color: #f7f5f0;       /* Màu be kem chủ đạo */
+            --text-main: #354538;      /* Màu xanh rêu trầm cực sang */
+            --text-sub: #5c6b5d;       /* Màu xanh rêu nhạt */
+            --btn-color: #93684a;      /* Màu nâu gỗ cho nút bấm */
+            --btn-hover: #725039;
+            --card-bg: #fdfcf9;        /* Màu nền thẻ truyện */
+            --divider: #e0dcd2;        /* Đường kẻ nhạt */
         }
 
-        /* CÀI ĐẶT CƠ BẢN */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             background-color: var(--bg-color); 
             color: var(--text-main); 
             font-family: 'Lora', serif; 
-            line-height: 1.5;
+            line-height: 1.6;
         }
-        h1, h2, h3, .logo { 
-            font-family: 'Playfair Display', serif; 
-        }
-        a { text-decoration: none; color: inherit; }
+        h1, h2, h3, .logo { font-family: 'Playfair Display', serif; }
+        a { text-decoration: none; color: inherit; display: block; }
 
-        /* HEADER */
-        header { padding: 30px 50px; text-align: center; }
-        .logo { font-size: 32px; letter-spacing: 2px; color: var(--text-main); }
-        .nav-links { margin-top: 15px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
-        .nav-links a { margin: 0 15px; color: var(--text-sub); transition: 0.3s; }
-        .nav-links a:hover { color: var(--text-main); }
-
-        /* KHUNG CHỨA NỘI DUNG */
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-
-        /* DANH MỤC TRUYỆN */
-        .category-section { margin-bottom: 60px; }
-        .category-title { 
-            font-size: 26px; 
-            margin-bottom: 25px; 
-            color: var(--text-main);
-            font-weight: 700;
+        /* 1. THANH ĐIỀU HƯỚNG NÉT ĐỨT */
+        .nav-container { padding: 30px 20px 0 20px; background-color: white; }
+        .nav-box {
+            border: 1px dashed var(--text-main); max-width: 900px; margin: 0 auto; padding: 20px;
+            display: flex; justify-content: center; align-items: center; gap: 30px; font-size: 15px; font-weight: 500; letter-spacing: 1px;
         }
+        .nav-box a { color: var(--text-main); transition: 0.2s; display: inline-block; }
+        .nav-box a:hover { color: var(--btn-color); }
+        .nav-divider { color: var(--divider); }
 
-        /* LƯỚI HIỂN THỊ TRUYỆN */
-        .grid-container { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 40px; 
+        /* 2. BANNER SAO BĂNG */
+        .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200') no-repeat center center;
+            background-size: cover; height: 450px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #ffffff; text-align: center; margin-bottom: 60px;
         }
+        .banner h1 { font-size: 56px; margin-bottom: 15px; letter-spacing: 3px; }
+        .banner p { font-size: 16px; opacity: 0.9; font-style: italic; letter-spacing: 1px; }
 
-        /* THẺ TRUYỆN */
-        .story-card {
-            background-color: var(--card-bg);
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease;
+        .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
+
+        /* 3. HERO SPLIT (Tàn tinh hiểu nguyệt) */
+        .hero-split {
+            display: flex; background-color: var(--bg-color); margin-bottom: 80px; border: 1px solid var(--divider); box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
-        .story-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        .hero-left { flex: 5; }
+        .hero-left img { width: 100%; height: 480px; object-fit: cover; display: block; }
+        .hero-right {
+            flex: 5; background-color: #fdfbf7; padding: 50px; display: flex; flex-direction: column; justify-content: center;
         }
-        .story-card img {
+        .hero-right h2 { font-size: 48px; color: var(--text-main); margin-bottom: 35px; line-height: 1.25; font-weight: 500; }
+        .hero-btn { background-color: var(--btn-color); color: #ffffff; border: none; padding: 12px 35px; border-radius: 25px; font-size: 13px; font-weight: bold; letter-spacing: 1px; cursor: pointer; width: fit-content; transition: 0.3s; text-transform: uppercase; display: inline-block; }
+        .hero-btn:hover { background-color: var(--btn-hover); }
+
+        /* 4. TRUYỆN MỚI CẬP NHẬT (ẢNH BÌA + TỰ ĐỘNG LẤY CHƯƠNG) */
+        .section-title { text-align: center; font-size: 42px; color: var(--text-main); margin-bottom: 50px; font-weight: 500; }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            margin-bottom: 80px;
+        }
+        .story-update-card {
+            background: var(--card-bg);
+            border: 1px solid var(--divider);
+            padding: 15px; 
+            border-radius: 4px;
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .story-update-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            border-color: var(--text-sub); 
+        }
+        .story-update-img {
             width: 100%;
             height: 380px;
             object-fit: cover;
-            display: block;
+            margin-bottom: 18px;
+            border-radius: 2px;
         }
-        .card-content {
-            padding: 20px;
+        .story-update-info {
+            text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            flex-grow: 1;
+            /* Chống tràn chữ khi tên chương quá dài */
+            overflow: hidden;
         }
-        .meta-tag {
-            font-family: sans-serif;
-            font-size: 10px;
-            color: #888;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        .story-title {
+        .story-update-title {
             font-size: 20px;
-            line-height: 1.3;
-            margin-bottom: 12px;
             color: var(--text-main);
+            line-height: 1.4;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
-        .story-desc {
-            font-size: 13px;
-            color: var(--text-sub);
-            margin-bottom: 20px;
-            min-height: 40px;
-        }
-        .divider {
-            border: none;
-            border-top: 1px solid var(--divider);
-            margin-bottom: 20px;
-        }
-        .btn-read {
-            display: inline-block;
-            background-color: var(--btn-color);
-            color: white;
-            font-family: sans-serif;
-            font-size: 12px;
-            font-weight: bold;
+        .story-update-tag {
+            font-size: 11px;
+            color: #8c6239;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 10px 25px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            width: fit-content;
+            margin-bottom: 10px;
+            font-family: sans-serif;
+            font-weight: bold;
+            /* Rút gọn chữ bằng dấu 3 chấm nếu quá dài */
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            display: block;
         }
-        .btn-read:hover {
-            background-color: var(--btn-hover);
+
+        /* 5. KHUNG BÌNH LUẬN CÓ NHẬP NICKNAME */
+        .comments-section { border-top: 1px solid var(--divider); padding-top: 50px; margin-bottom: 80px; }
+        .comments-title { font-size: 20px; color: var(--text-main); margin-bottom: 25px; font-weight: 600; }
+        
+        .comment-input-box {
+            display: flex; flex-direction: column; align-items: flex-end; gap: 10px; margin-bottom: 40px;
         }
-        .coming-soon-text {
-            font-size: 14px;
-            color: var(--text-sub);
-            font-style: italic;
+        .comment-name-input {
+            width: 100%; padding: 12px 15px; background-color: var(--card-bg); border: 1px solid var(--divider); border-radius: 4px; font-family: 'Lora', serif; font-size: 14px; outline: none; color: #222;
         }
-        @media (max-width: 600px) {
-            .grid-container { grid-template-columns: 1fr; }
-            .story-card img { height: auto; aspect-ratio: 2/3; }
+        .comment-input {
+            width: 100%; height: 90px; padding: 15px; background-color: var(--card-bg); border: 1px solid var(--divider); border-radius: 4px; font-family: 'Lora', serif; font-size: 14px; resize: none; outline: none; color: #222;
+        }
+        .comment-name-input::placeholder, .comment-input::placeholder { color: #9ba89c; font-style: italic; }
+        .btn-submit-comment { background-color: var(--text-main); color: white; border: none; padding: 8px 20px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-submit-comment:hover { background-color: var(--btn-color); }
+        
+        .comments-list { margin-top: 30px; }
+        .comment-item { background: var(--card-bg); border: 1px solid var(--divider); padding: 20px; border-radius: 4px; margin-bottom: 15px; }
+        .comment-header { display: flex; justify-content: space-between; font-size: 12px; color: #777; margin-bottom: 8px; }
+        .comment-author { font-weight: bold; color: var(--btn-color); font-size: 14px;}
+        .comment-body { font-size: 14px; line-height: 1.5; color: #222; }
+
+        .no-comments { text-align: center; padding: 20px 0; }
+        .no-comments h4 { font-size: 16px; color: var(--text-main); margin-bottom: 5px; }
+        .no-comments p { font-size: 13px; color: #888; }
+
+        @media (max-width: 768px) {
+            .hero-split { flex-direction: column; }
+            .cards-grid { grid-template-columns: 1fr; gap: 25px; }
+            .nav-box { gap: 15px; font-size: 13px; }
+            .story-update-img { height: 450px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1 class="logo">残星晓月</h1>
-        <div class="nav-links">
-            <a href="index.html">Trang Chủ</a>
-            <a href="#">Danh Sách Truyện</a>
+    <div class="nav-container">
+        <div class="nav-box">
+            <a href="index.html" style="display:inline-block">TRANG CHỦ</a>
+            <span class="nav-divider">|</span>
+            <!-- Dẫn thẳng tới trang mục lục của truyện -->
+            <a href="vong-tron-dinh-menh.html" style="display:inline-block">GIỚI THIỆU</a>
+            <span class="nav-divider">|</span>
+            <a href="#" style="display:inline-block">HẠT GIỐNG ĐÃ TRỒNG</a>
         </div>
-    </header>
+    </div>
+
+    <div class="banner">
+        <h1>残星晓月</h1>
+        <p>残星晓月，为何内心依然眷恋往事？</p>
+    </div>
 
     <div class="container">
         
-        <!-- MỤC 1: TRUYỆN NAM CHỦ -->
-        <div class="category-section">
-            <h2 class="category-title">Truyện nam chủ</h2>
-            <div class="grid-container">
-                <div class="story-card">
-              <img src="vong-tron-data/bia-vong-tron.jpg" alt="Bìa truyện">
-                    <div class="card-content">
-                        <div class="meta-tag">Đang Edit</div>
-                        <h3 class="story-title">Vòng Tròn Định Mệnh - Mực Thích Lặn Nước</h3>
-                        <p class="story-desc">Năm 1988, cuối tháng Bảy, sắc đỏ thẫm sẽ từ trên trời giáng xuống.</p>
-                        <hr class="divider">
-                        <!-- ĐÃ LIÊN KẾT THẲNG ĐẾN FILE MỤC LỤC BẠN VỪA TẠO -->
-                        <a href="vong-tron-dinh-menh.html"><button class="btn-read">Đọc Ngay</button></a>
-                    </div>
-                </div>
+        <div class="hero-split">
+            <div class="hero-left">
+                <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=600&auto=format&fit=crop" alt="Shooting Star">
+            </div>
+            <div class="hero-right">
+                <h2>Tàn tinh<br>hiểu nguyệt</h2>
+                <a href="vong-tron-dinh-menh.html" class="hero-btn">Giới Thiệu</a>
             </div>
         </div>
 
-        <!-- MỤC 2: TRUYỆN Gây -->
-        <div class="category-section">
-            <h2 class="category-title">Truyện gay</h2>
-            <div class="grid-container">
-                <div class="story-card">
-                    <img src="https://i.pinimg.com/736x/8f/3e/16/8f3e16447c216c59bba6ed22d4f5d817.jpg" alt="Bìa truyện">
-                    <div class="card-content">
-                        <div class="meta-tag">Đang Edit</div>
-                        <h3 class="story-title">Đợi em thi đại học xong đã - Khoai Tây Ninh Nhừ</h3>
-                        <p class="story-desc">Lập ý: Học hành chăm chỉ, nghiêm túc thi đại học.</p>
-                        <hr class="divider">
-                        <a href="#"><button class="btn-read">Đọc Ngay</button></a>
-                    </div>
+        <h2 class="section-title">Truyện mới cập nhật</h2>
+        
+        <div class="cards-grid">
+            <!-- Truyện 1: Vòng Tròn Định Mệnh (CÓ TỰ ĐỘNG ĐỒNG BỘ CHƯƠNG) -->
+            <a href="vong-tron-dinh-menh.html" class="story-update-card">
+                <img src="https://i.pinimg.com/736x/21/df/b8/21dfb85f2f5fc2dc88cd0a894a413d78.jpg" alt="Bìa truyện 1" class="story-update-img">
+                <div class="story-update-info">
+                    <!-- id="tag-vong-tron" để Javascript tự tìm và điền chương mới nhất vào đây -->
+                    <span class="story-update-tag" id="tag-vong-tron">Đang tải chương mới...</span>
+                    <h3 class="story-update-title">Vòng Tròn Định Mệnh</h3>
                 </div>
-                <div class="story-card">
-                    <img src="https://i.pinimg.com/736x/91/92/df/9192df4da69fbafc1483dc47f8baab4c.jpg" alt="Bìa truyện">
-                    <div class="card-content">
-                        <div class="meta-tag">Đang Edit</div>
-                        <h3 class="story-title">Át Bích - Tần Tam Kiến</h3>
-                        <p class="story-desc">Giới thiệu: Niên hạ.</p>
-                        <hr class="divider">
-                        <a href="#"><button class="btn-read">Đọc Ngay</button></a>
-                    </div>
+            </a>
+
+            <!-- Truyện 2 -->
+            <a href="#" class="story-update-card">
+                <img src="https://i.pinimg.com/736x/8f/3e/16/8f3e16447c216c59bba6ed22d4f5d817.jpg" alt="Bìa truyện 2" class="story-update-img">
+                <div class="story-update-info">
+                    <span class="story-update-tag">Sắp ra mắt</span>
+                    <h3 class="story-update-title">Đợi em thi đại học xong đã</h3>
                 </div>
-            </div>
+            </a>
+
+            <!-- Truyện 3 -->
+            <a href="#" class="story-update-card">
+                <img src="https://i.pinimg.com/736x/91/92/df/9192df4da69fbafc1483dc47f8baab4c.jpg" alt="Bìa truyện 3" class="story-update-img">
+                <div class="story-update-info">
+                    <span class="story-update-tag">Đã hoàn thành</span>
+                    <h3 class="story-update-title">Át Bích</h3>
+                </div>
+            </a>
         </div>
 
-        <!-- MỤC 3: FANFIC -->
-        <div class="category-section">
-            <h2 class="category-title">Fanfic</h2>
-            <p class="coming-soon-text">Sắp có</p>
+        <!-- PHẦN BÌNH LUẬN NÂNG CẤP -->
+        <div class="comments-section">
+            <h3 class="comments-title">Bình luận</h3>
+            
+            <div class="comment-input-box">
+                <input type="text" class="comment-name-input" id="comment-name" placeholder="Tên của bạn (bỏ trống sẽ là Ẩn danh)">
+                <textarea class="comment-input" id="comment-input" placeholder="Viết bình luận"></textarea>
+                <button class="btn-submit-comment" id="comment-submit">Gửi bình luận</button>
+            </div>
+
+            <div class="no-comments" id="no-comments">
+                <h4>Chia sẻ suy nghĩ của bạn</h4>
+                <p>Hãy là người đầu tiên viết bình luận.</p>
+            </div>
+
+            <div class="comments-list" id="comments-list">
+                <!-- Bình luận sẽ tự động sinh ra ở đây -->
+            </div>
         </div>
 
     </div>
 
+    <!-- TẤT CẢ JAVASCRIPT XỬ LÝ (BÌNH LUẬN & ĐỒNG BỘ CHƯƠNG) NẰM Ở ĐÂY -->
+    <script>
+        // --- 1. XỬ LÝ BÌNH LUẬN CÓ TÊN ---
+        const nameInput = document.getElementById('comment-name');
+        const commentInput = document.getElementById('comment-input');
+        const commentSubmit = document.getElementById('comment-submit');
+        const commentsList = document.getElementById('comments-list');
+        const noComments = document.getElementById('no-comments');
+
+        document.addEventListener("DOMContentLoaded", loadComments);
+
+        function loadComments() {
+            const comments = JSON.parse(localStorage.getItem('story_blog_comments_v2') || '[]');
+            if (comments.length > 0) {
+                noComments.style.display = 'none';
+                commentsList.innerHTML = '';
+                comments.forEach(c => {
+                    appendCommentDOM(c.name, c.text, c.date);
+                });
+            }
+        }
+
+        function appendCommentDOM(name, text, date) {
+            const div = document.createElement('div');
+            div.className = 'comment-item';
+            div.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-author">${name}</span>
+                    <span class="comment-date">${date}</span>
+                </div>
+                <div class="comment-body">${text}</div>
+            `;
+            commentsList.appendChild(div);
+        }
+
+        commentSubmit.addEventListener('click', () => {
+            const text = commentInput.value.trim();
+            const authorName = nameInput.value.trim() || 'Độc giả ẩn danh'; 
+            
+            if (!text) return alert("Vui lòng nhập nội dung bình luận!");
+            
+            const dateStr = new Date().toLocaleDateString('vi-VN', { 
+                hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit'
+            });
+
+            const comments = JSON.parse(localStorage.getItem('story_blog_comments_v2') || '[]');
+            comments.push({ name: authorName, text: text, date: dateStr });
+            localStorage.setItem('story_blog_comments_v2', JSON.stringify(comments));
+            
+            noComments.style.display = 'none';
+            appendCommentDOM(authorName, text, dateStr);
+            commentInput.value = '';
+        });
+
+        // --- 2. XỬ LÝ TỰ ĐỘNG ĐỒNG BỘ TÊN CHƯƠNG MỚI NHẤT ---
+        function autoUpdateLatestChapter(tocUrl, tagId) {
+            fetch(tocUrl)
+                .then(response => {
+                    if(!response.ok) throw new Error("Chưa có");
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const chapters = doc.querySelectorAll('.chapter-btn');
+                    
+                    if(chapters.length > 0) {
+                        // Lấy tên của nút chương ở vị trí cuối cùng
+                        let lastChapterText = chapters[chapters.length - 1].innerText;
+                        document.getElementById(tagId).innerText = "Mới nhất: " + lastChapterText;
+                    } else {
+                        document.getElementById(tagId).innerText = "Chưa có chương";
+                    }
+                })
+                .catch(err => {
+                    document.getElementById(tagId).innerText = "Mới nhất: Đang cập nhật...";
+                });
+        }
+
+        // KÍCH HOẠT ĐỒNG BỘ: Điền đúng link Mục Lục và ID thẻ truyện ở trên
+        autoUpdateLatestChapter('vong-tron-dinh-menh.html', 'tag-vong-tron');
+        
+    </script>
 </body>
 </html>

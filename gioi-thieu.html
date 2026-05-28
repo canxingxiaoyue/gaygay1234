@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới Thiệu - 残星晓月</title>
+    
+    <!-- Nhúng Font Playfair, Lora và Noto Serif SC (Cho chữ Hán) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;1,400&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #f7f5f0;       
+            --text-main: #354538;      
+            --text-sub: #5c6b5d;       
+            --btn-color: #93684a;      
+            --card-bg: #ffffff;        
+            --divider: #e0dcd2;        
+            --hero-bg: #5a6858; /* Màu xanh rêu của nền giới thiệu */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Lora', serif; line-height: 1.6; }
+        
+        /* Cập nhật Font chữ có thêm Noto Serif SC để chữ Hán siêu đẹp */
+        h1, h2, h3, .logo { font-family: 'Playfair Display', 'Noto Serif SC', serif; }
+        
+        a { text-decoration: none; color: inherit; display: block; }
+
+        /* THANH ĐIỀU HƯỚNG NÉT ĐỨT */
+        .nav-container { padding: 30px 20px 30px 20px; background-color: var(--bg-color); }
+        .nav-box {
+            border: 1px dashed var(--text-main); max-width: 900px; margin: 0 auto; padding: 20px;
+            display: flex; justify-content: center; align-items: center; gap: 30px; font-size: 15px; font-weight: 500; letter-spacing: 1px;
+            background-color: white;
+        }
+        .nav-box a { color: var(--text-main); transition: 0.2s; display: inline-block; }
+        .nav-box a:hover { color: var(--btn-color); }
+        .nav-box a.active { border-bottom: 2px solid var(--text-main); padding-bottom: 2px; }
+        .nav-divider { color: var(--divider); }
+
+        /* PHẦN BANNER XANH RÊU (HERO SECTION) */
+        .intro-hero {
+            background-color: var(--hero-bg);
+            padding: 80px 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+        .intro-hero-left { flex: 1; color: #ffffff; }
+        
+        /* CĂN CHỈNH TIÊU ĐỀ KHÔNG BỊ RỚT DÒNG */
+        .intro-hero-left h1 { 
+            font-size: 56px; 
+            margin-bottom: 20px; 
+            letter-spacing: 4px; 
+            white-space: nowrap; /* Bắt buộc không rớt dòng */
+        }
+        .intro-hero-left p { font-size: 17px; line-height: 1.8; opacity: 0.95; }
+        
+        .intro-hero-right {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .intro-hero-right img {
+            width: 240px;
+            height: 360px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .intro-hero-right img:hover { transform: translateY(-5px); }
+
+        /* KHUNG NỘI DUNG LƯU Ý */
+        .rules-container {
+            max-width: 800px;
+            margin: 80px auto;
+            background: var(--card-bg);
+            padding: 50px 60px;
+            border: 1px solid var(--divider);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+        .rules-title {
+            text-align: center;
+            font-size: 32px;
+            color: var(--text-main);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .rules-title::after {
+            content: ''; display: block; width: 60px; height: 2px;
+            background-color: var(--btn-color); margin: 15px auto 0 auto;
+        }
+        
+        .rules-content p {
+            margin-bottom: 25px; font-size: 16px; line-height: 1.9;
+            color: #333; text-align: justify; position: relative; padding-left: 30px;
+        }
+        .rules-content p::before {
+            content: "🌿"; position: absolute; left: 0; top: 2px; font-size: 14px;
+        }
+
+        /* ĐÁP ỨNG GIAO DIỆN ĐIỆN THOẠI CHUẨN XÁC */
+        @media (max-width: 768px) {
+            .intro-hero { flex-direction: column; padding: 50px 20px; text-align: center; }
+            /* Thu nhỏ chữ Hán trên điện thoại để không bị chật */
+            .intro-hero-left h1 { font-size: 40px; } 
+            
+            .intro-hero-right { flex-direction: column; align-items: center; margin-top: 30px; }
+            .intro-hero-right img { width: 100%; height: auto; max-width: 300px; }
+            .rules-container { margin: 40px 20px; padding: 30px 20px; }
+            .nav-box { flex-wrap: wrap; gap: 15px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- THANH MENU -->
+    <div class="nav-container">
+        <div class="nav-box">
+            <a href="index.html" style="display:inline-block">TRANG CHỦ</a>
+            <span class="nav-divider">|</span>
+            <a href="gioi-thieu.html" class="active" style="display:inline-block">GIỚI THIỆU</a>
+            <span class="nav-divider">|</span>
+            <a href="#" style="display:inline-block">HẠT GIỐNG ĐÃ TRỒNG</a>
+        </div>
+    </div>
+
+    <!-- BANNER XANH RÊU VÀ ẢNH ĐÔI -->
+    <div class="intro-hero">
+        <div class="intro-hero-left">
+            <!-- Chữ Hán sẽ tự động nhận Font bút lông siêu đẹp -->
+            <h1>残星晓月</h1>
+            <p>Chào mừng bạn ghé chơi nhà của mình, trước khi bạn bước vào, xin hãy dành một chút thời gian đọc vài lời lưu ý đến từ chủ nhà nhé~</p>
+        </div>
+        <div class="intro-hero-right">
+            <img src="https://images.unsplash.com/photo-1532767153582-b1a0e5145009?q=80&w=400&auto=format&fit=crop" alt="Bầu trời đêm">
+            <img src="https://images.unsplash.com/photo-1586500036706-41963de24d8b?q=80&w=400&auto=format&fit=crop" alt="Hoàng hôn">
+        </div>
+    </div>
+
+    <!-- KHUNG NỘI DUNG LƯU Ý -->
+    <div class="rules-container">
+        <h2 class="rules-title">Lưu ý nho nhỏ</h2>
+        
+        <div class="rules-content">
+            <p>Nhà của tớ dùng để chia sẻ tất cả những sở thích của tớ, chủ yếu là truyện niên hạ. Tớ không đọc sinh tử văn, ABO (AO), tra công tiện thụ, tra thụ tiện công, còn lại cái gì cũng húp.</p>
+            <p>Bạn đến ghé chơi có thể tham quan, nhưng không được reup. Không được phép đăng lại, sử dụng nội dung trong blog của tớ với mục đích lợi nhuận.</p>
+            <p>Những tác phẩm fanwork về cp tớ sẽ đặt pass, pass là tên của cp đó không dấu không cách không viết hoa. Ví dụ: Lăng Ngọc thì pass sẽ là <strong>langngoc</strong>.</p>
+            <p>Sử dụng ngôn từ lịch sự, tôn trọng chủ nhà cũng như các khách đến thăm khác.</p>
+        </div>
+    </div>
+
+</body>
+</html>

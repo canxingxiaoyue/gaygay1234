@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đang tải chương...</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #f7f4ed; --text-main: #2b3a2e; --text-sub: #555555;
@@ -15,14 +15,14 @@
         /* BỐ CỤC CHIA HAI CỘT ĐỂ HIỂN THỊ SIDEBAR BÌNH LUẬN ĐOẠN */
         .main-wrapper {
             display: flex;
-            max-width: 720px; /* Mặc định căn giữa khi không có bình luận đoạn */
+            max-width: 720px; 
             margin: 0 auto;
             gap: 25px;
             align-items: flex-start;
             transition: max-width 0.3s ease;
         }
         .main-wrapper.sidebar-open {
-            max-width: 1120px; /* Mở rộng khi bật bình luận đoạn */
+            max-width: 1140px; /* Mở rộng khi bật bình luận đoạn */
         }
 
         .container { 
@@ -43,7 +43,7 @@
         .inner-divider { border: none; border-top: 1px dashed var(--divider); width: 40%; margin: 40px auto; }
         .editor-note { background-color: #f1ede4; border-left: 4px solid var(--btn-color); padding: 15px 20px; font-size: 15px; color: #5c6b5d; font-style: italic; margin-bottom: 30px; border-radius: 0 6px 6px 0; line-height: 1.6; }
 
-        /* ĐỊNH DẠNG TỪNG ĐOẠN VĂN ĐỂ BẤM BÌNH LUẬN (GIỐNG HỆT ẢNH MẪU) */
+        /* ĐỊNH DẠNG TỪNG ĐOẠN VĂN ĐỂ BẤM BÌNH LUẬN */
         .story-paragraph {
             display: flex;
             justify-content: space-between;
@@ -69,7 +69,7 @@
         
         /* Bong bóng đếm số bình luận đoạn */
         .para-badge {
-            background-color: #cbd5e1; /* Màu xám khi chưa có bình luận */
+            background-color: #cbd5e1; 
             color: white;
             font-size: 11px;
             font-weight: bold;
@@ -85,96 +85,179 @@
             transition: 0.2s;
         }
         .para-badge.has-comments {
-            background-color: #a7f3d0; /* Màu xanh khi đã có bình luận */
+            background-color: #a7f3d0; 
             color: #065f46;
         }
 
-        /* GIAO DIỆN THANH TRƯỢT SIDEBAR BÊN PHẢI (GIỐNG HỆT ẢNH MẪU) */
+        /* ==================================================== */
+        /* KIỆT TÁC SIDEBAR PHONG THƯ CỔ ĐIỂN (GIỐNG 100% ẢNH MẪU) */
+        /* ==================================================== */
         .para-sidebar {
-            width: 360px;
-            background: var(--card-bg);
-            border: 1px solid var(--divider);
-            border-radius: 8px;
+            width: 380px;
+            background-color: #eeddbd;
+            /* Ảnh nền giấy mỹ thuật sần sùi hoài cổ */
+            background-image: url('https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=400');
+            background-size: cover;
+            border: 2px solid #bda88a;
+            border-radius: 12px;
             padding: 24px;
             position: sticky;
             top: 20px;
-            display: none; /* Ẩn đi mặc định, hiện lên khi click */
+            display: none; 
             flex-direction: column;
             height: calc(100vh - 40px);
-            max-height: 600px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            max-height: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 0 40px rgba(0,0,0,0.05);
+            color: #4a3319; /* Chữ màu nâu gỗ đậm */
         }
         .main-wrapper.sidebar-open .para-sidebar {
-            display: flex; /* Hiện lên khi có class sidebar-open */
+            display: flex; 
         }
         
         .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #bceadd;
-            padding-bottom: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
         }
-        .sidebar-title { font-size: 15px; font-weight: bold; color: #0d4a68; font-family: sans-serif; }
-        .sidebar-close { font-size: 13px; font-weight: bold; color: #ef4444; cursor: pointer; font-family: sans-serif; }
-        
-        /* Trích dẫn đoạn văn */
-        .sidebar-quote {
-            border-left: 3px solid #10b981;
-            padding-left: 10px;
-            font-style: italic;
-            color: #666;
-            font-size: 13px;
+        .sidebar-title { font-size: 18px; font-weight: bold; color: #4a3319; font-family: 'Lora', serif; }
+        .sidebar-close { font-size: 14px; font-weight: bold; color: #b05545; cursor: pointer; font-family: sans-serif; transition: 0.2s; }
+        .sidebar-close:hover { text-decoration: underline; }
+
+        /* Hoa văn bướm / tim cách điệu dưới tiêu đề */
+        .sidebar-divider-flourish {
+            display: flex;
+            justify-content: center;
             margin-bottom: 20px;
-            text-align: left;
-            line-height: 1.5;
+            opacity: 0.7;
         }
         
-        /* Danh sách bình luận đoạn */
+        /* ✉️ KHUNG TRÍCH DẪN ĐOẠN VĂN KIỂU PHONG THƯ AIRMAIL */
+        .envelope-wrapper {
+            /* Đường viền sọc đỏ/xanh chuẩn Airmail */
+            background: repeating-linear-gradient(
+                -45deg,
+                #b05545, #b05545 12px,
+                #fdfcf9 12px, #fdfcf9 24px,
+                #4e6d8a, #4e6d8a 24px,
+                #fdfcf9 24px, #fdfcf9 36px
+            );
+            padding: 5px;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .envelope-inner {
+            background-color: #f7edd7;
+            /* Giấy sần bưu điện */
+            background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=300');
+            padding: 18px 15px 25px 15px;
+            border-radius: 4px;
+            position: relative;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar-quote {
+            border-left: 2px solid #8c6c50;
+            padding-left: 12px;
+            font-style: italic;
+            color: #4a3319;
+            font-size: 13.5px;
+            text-align: justify;
+            line-height: 1.6;
+            width: 100%;
+        }
+        
+        /* Con dấu sáp trái tim nổi 3D ở mép dưới phong thư */
+        .wax-seal {
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 38px;
+            height: 38px;
+            background-color: #8a3324;
+            border-radius: 50%;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.35), inset 0 0 6px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            border: 1px solid #70281b;
+        }
+        .wax-seal::after {
+            content: '❤';
+            color: #a34636;
+            font-size: 16px;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.2);
+        }
+        
+        /* 📝 KHUNG CHỨA BÌNH LUẬN NÉT ĐỨT */
         .sidebar-comments-list {
             flex-grow: 1;
             overflow-y: auto;
-            margin-bottom: 15px;
-            padding-right: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px dashed #8c6c50;
+            border-radius: 8px;
+            background-color: rgba(253, 252, 249, 0.35);
+            position: relative;
         }
         
-        /* Thẻ bình luận tròn giống hệt ảnh của bạn */
+        /* Thẻ bình luận tròn cổ điển */
         .sidebar-comment-item {
             display: flex;
             gap: 12px;
-            background-color: #f5f4ef;
+            background-color: rgba(245, 244, 239, 0.85);
             border-radius: 12px;
             padding: 12px;
             margin-bottom: 12px;
-            border: 1px solid #e0dcd2;
+            border: 1px solid #dcd7cb;
             align-items: flex-start;
         }
         .comment-avatar {
-            width: 32px; height: 32px; border-radius: 50%; background: #d1fae5;
+            width: 32px; height: 32px; border-radius: 50%; background: #dcd7cb;
             display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
         .comment-info-box { flex-grow: 1; }
-        .comment-user-name { font-weight: bold; font-size: 13px; color: #2b3a2e; font-family: sans-serif; }
+        .comment-user-name { font-weight: bold; font-size: 13px; color: #4a3319; font-family: sans-serif; }
         .comment-date-time { font-size: 10px; color: #999; float: right; font-family: sans-serif; margin-top: 2px; }
-        .comment-text { font-size: 13px; color: #444; margin-top: 4px; line-height: 1.4; }
-        .comment-reply-btn { font-size: 11px; color: #10b981; font-weight: bold; margin-top: 5px; display: inline-block; font-family: sans-serif; }
+        .comment-text { font-size: 13px; color: #555; margin-top: 4px; line-height: 1.4; text-align: left;}
+        .comment-reply-btn { font-size: 11px; color: #8c6c50; font-weight: bold; margin-top: 5px; display: inline-block; font-family: sans-serif; }
 
-        /* Ô nhập bình luận ở cuối Sidebar */
+        /* 🖋️ KHUNG NHẬP BÌNH LUẬN LÔNG VŨ */
         .sidebar-input-box {
-            border-top: 1px solid var(--divider);
-            padding-top: 15px;
+            position: relative;
+            margin-top: auto;
         }
         .sidebar-textarea {
-            width: 100%; height: 60px; padding: 10px; border: 1px solid var(--divider);
-            border-radius: 6px; font-family: 'Lora', serif; font-size: 13px; resize: none; outline: none; background: var(--bg-color);
+            width: 100%; height: 80px; padding: 15px 40px 15px 15px; border: 1px dashed #8c6c50;
+            border-radius: 8px; font-family: 'Lora', serif; font-size: 13.5px; resize: none; outline: none; 
+            background: rgba(253, 252, 249, 0.6); color: #4a3319;
         }
+        .sidebar-textarea::placeholder { color: #a19280; font-style: italic; }
+        
+        /* Chiếc lông vũ đặt góc phải */
+        .quill-icon {
+            position: absolute; bottom: 12px; right: 15px; opacity: 0.55; pointer-events: none;
+        }
+
+        /* NÚT GỬI TÂM TƯ MÀU ĐỎ ĐẤT SANG TRỌNG */
         .sidebar-submit-btn {
-            width: 100%; background-color: #10b981; color: white; border: none; padding: 10px;
-            border-radius: 6px; font-weight: bold; margin-top: 8px; cursor: pointer; font-size: 12px;
-            text-transform: uppercase; transition: 0.2s; font-family: sans-serif;
+            width: 100%; 
+            background: linear-gradient(to right, #9e5e4a, #8c4e3c); 
+            color: #f7f4ed; border: none; padding: 14px;
+            border-radius: 25px; font-weight: bold; margin-top: 12px; cursor: pointer; font-size: 14px;
+            text-transform: uppercase; transition: 0.3s; font-family: 'Playfair Display', serif;
+            letter-spacing: 2px; box-shadow: 0 4px 10px rgba(158, 94, 74, 0.25);
+            display: flex; align-items: center; justify-content: center;
         }
-        .sidebar-submit-btn:hover { background-color: #059669; }
+        .sidebar-submit-btn:hover { 
+            background: linear-gradient(to right, #8c4e3c, #783e2f); 
+            box-shadow: 0 6px 15px rgba(158, 94, 74, 0.35);
+        }
 
         /* Điều hướng và bình luận chương bên dưới */
         .footer-nav { border-top: 1px solid var(--divider); padding-top: 30px; margin-top: 40px; display: flex; justify-content: space-between; margin-bottom: 40px; }
@@ -217,7 +300,6 @@
             <h1 id="chapter-title">Đang tải nội dung...</h1>
             <div class="story-title-sub" id="story-title">Đang tải...</div>
             
-            <!-- Nội dung chữ truyện -->
             <div class="content-area" id="content-area"></div>
             
             <div class="footer-nav">
@@ -225,7 +307,7 @@
                 <a href="#" id="next-btn" class="footer-btn">Chương sau</a>
             </div>
 
-            <!-- Khung bình luận toàn bộ chương bên dưới -->
+            <!-- Khung bình luận toàn chương -->
             <div class="comments-section">
                 <h3 class="comments-title">Bình luận chương</h3>
                 <div class="comment-input-box">
@@ -241,24 +323,68 @@
             </div>
         </div>
 
-        <!-- CỘT PHẢI: SIDEBAR BÌNH LUẬN ĐOẠN (GIỐNG HỆT ẢNH MẪU CỦA BẠN) -->
+        <!-- CỘT PHẢI: SIDEBAR THƯ TAY CỔ ĐIỂN (GIỐNG HỆT ẢNH MẪU) -->
         <div class="para-sidebar" id="para-sidebar">
             <div class="sidebar-header">
-                <span class="sidebar-title" id="sidebar-para-title">💬 Bình luận Đoạn 1</span>
+                <span class="sidebar-title">💬 Bình luận đoạn</span>
                 <span class="sidebar-close" onclick="closeParaComments()">[Đóng X]</span>
             </div>
             
-            <!-- Trích dẫn đoạn văn đang bấm -->
-            <div class="sidebar-quote" id="sidebar-quote">"Giới thiệu"</div>
+            <!-- Hoa văn tim bướm lãng mạn dưới tiêu đề -->
+            <div class="sidebar-divider-flourish">
+                <svg width="120" height="16" viewBox="0 0 120 16" fill="none" stroke="#8c6c50" stroke-width="1.2">
+                    <path d="M10 8 H 50 C 53 8, 53 2, 56 5 C 58 8, 62 8, 64 5 C 67 2, 67 8, 70 8 H 110"/>
+                    <path d="M56 5 C 58 8, 62 8, 64 5" fill="none"/>
+                    <path d="M58 6 A 2 2 0 0 1 62 6 A 2 2 0 0 1 58 6" fill="#8c6c50"/>
+                </svg>
+            </div>
             
-            <!-- Danh sách bình luận đoạn -->
+            <!-- Khung đoạn văn trích dẫn dạng bìa Phong Thư Bưu Điện -->
+            <div class="envelope-wrapper">
+                <div class="envelope-inner">
+                    <!-- Con dấu sáp trái tim nổi 3D bám mép -->
+                    <div class="wax-seal"></div>
+                    
+                    <!-- Hình hoa văn hoa bưu điện mờ -->
+                    <svg width="60" height="60" style="position:absolute; bottom:10px; right:10px; opacity:0.12;" viewBox="0 0 24 24" fill="none" stroke="#4a3319" stroke-width="1">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                        <path d="M12 6v12M6 12h12"/>
+                    </svg>
+                    
+                    <!-- Dấu mộc nhật ấn hình trái tim cổ -->
+                    <svg style="position: absolute; top: 12px; right: 12px; width: 45px; height: 45px; opacity: 0.25;" viewBox="0 0 50 50">
+                        <circle cx="25" cy="25" r="22" stroke="#4a3319" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
+                        <circle cx="25" cy="25" r="17" stroke="#4a3319" stroke-width="0.8" fill="none"/>
+                        <path d="M16 25 L34 25 M21 20 L29 30 M21 30 L29 20" stroke="#4a3319" stroke-width="0.8"/>
+                        <path d="M22 24 A 2 2 0 0 1 28 24 A 2 2 0 0 1 22 24" fill="#4a3319"/>
+                    </svg>
+
+                    <div class="sidebar-quote" id="sidebar-quote">"Ánh chiều tà xuyên qua..."</div>
+                </div>
+            </div>
+            
+            <!-- Danh sách bình luận đoạn dạng nét đứt -->
             <div class="sidebar-comments-list" id="sidebar-comments-list"></div>
             
-            <!-- Khung nhập bình luận đoạn -->
+            <!-- Khung nhập bình luận lông vũ bưu điện -->
             <div class="sidebar-input-box">
+                <!-- Chiếc lông vũ viết thư vẽ bằng SVG siêu nhẹ đặt ở góc phải -->
+                <svg class="quill-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8c6c50" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+                    <line x1="16" y1="8" x2="2" y2="22"/>
+                    <line x1="17.5" y1="15" x2="9" y2="15"/>
+                </svg>
+                
                 <textarea class="sidebar-textarea" id="sidebar-textarea" placeholder="Bình luận về đoạn văn này..."></textarea>
-                <button class="sidebar-submit-btn" id="sidebar-submit-btn">GỬI CMT ĐOẠN</button>
             </div>
+
+            <!-- Nút gửi tâm tư hạt đậu màu đỏ trầm -->
+            <button class="sidebar-submit-btn" id="sidebar-submit-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+                GỬI TÂM TƯ
+            </button>
         </div>
 
     </div>
@@ -278,7 +404,7 @@
         const commentStorageKey = `comments_${truyen}_${chuong}`;
         const txtPath = `${truyen}-data/${truyen}-${chuong}.txt`;
 
-        let totalParagraphs = 0; // Để đếm tổng số đoạn văn trong chương
+        let totalParagraphs = 0; 
 
         // Tải nội dung chương
         fetch(txtPath)
@@ -288,8 +414,8 @@
             })
             .then(text => {
                 parseAndDisplay(text);
-                loadComments(); // Tải bình luận chương
-                updateAllParaBadges(); // Cập nhật số đếm bong bóng bình luận đoạn
+                loadComments(); 
+                updateAllParaBadges(); 
             })
             .catch(error => {
                 showError(error.message);
@@ -316,9 +442,8 @@
                     htmlContent += "            <div class=\"editor-note\">" + cleanNote + "</div>\n";
                 } 
                 else {
-                    // TĂNG ĐOẠN VĂN ĐỂ GẮN SỰ KIỆN CLICK BÌNH LUẬN ĐOẠN
                     totalParagraphs++;
-                    const safeText = trimmed.replace(/"/g, '&quot;'); // Né lỗi dấu ngoặc kép
+                    const safeText = trimmed.replace(/"/g, '&quot;'); 
                     htmlContent += `
                     <div class="story-paragraph" onclick="openParaComments(${totalParagraphs}, this)" data-para-text="${safeText}">
                         <span class="story-para-text">${trimmed}</span>
@@ -342,14 +467,13 @@
             nextBtn.href = `doc.html?truyen=${truyen}&chuong=${chuong + 1}`;
         }
 
-        // --- 1. XỬ LÝ BÌNH LUẬN ĐOẠN TRƯỢT SIDEBAR ---
+        // --- 1. XỬ LÝ SIDEBAR THƯ TAY CỔ ĐIỂN ---
         let activeParaIndex = null;
 
         function openParaComments(paraIndex, element) {
             activeParaIndex = paraIndex;
             const paraText = element.getAttribute('data-para-text');
             
-            // Mở rộng Layout và hiện Sidebar bên phải
             document.getElementById('main-wrapper').classList.add('sidebar-open');
             document.getElementById('sidebar-para-title').innerText = `💬 Bình luận Đoạn ${paraIndex}`;
             document.getElementById('sidebar-quote').innerText = `"${paraText}"`;
@@ -362,7 +486,6 @@
             activeParaIndex = null;
         }
 
-        // Tải bình luận đoạn từ LocalStorage
         function loadParaComments(paraIndex) {
             const key = `comments_${truyen}_${chuong}_para_${paraIndex}`;
             const comments = JSON.parse(localStorage.getItem(key) || '[]');
@@ -370,18 +493,26 @@
             listContainer.innerHTML = '';
             
             if (comments.length === 0) {
-                listContainer.innerHTML = '<div style="text-align:center; color:#999; font-size:13px; padding:35px 0;">Chưa có bình luận nào cho đoạn này.</div>';
+                // Họa tiết dấu bưu điện mờ tinh tế khi chưa có comment
+                listContainer.innerHTML = `
+                    <div style="text-align:center; color:#8c6c50; font-size:14px; padding:65px 10px; font-style:italic; line-height:1.6; position:relative;">
+                        Chưa có bình luận nào cho đoạn này.
+                        <svg style="position: absolute; bottom: 5px; right: 5px; width: 50px; height: 50px; opacity: 0.15;" viewBox="0 0 50 50">
+                            <circle cx="25" cy="25" r="22" stroke="#4a3319" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
+                            <path d="M12 25 C15 15, 35 15, 38 25" stroke="#4a3319" stroke-width="0.8" fill="none"/>
+                            <path d="M18 20 A 3 3 0 0 1 32 20" fill="none" stroke="#4a3319" stroke-width="0.8"/>
+                        </svg>
+                    </div>`;
             } else {
                 comments.forEach(c => {
                     const div = document.createElement('div');
                     div.className = 'sidebar-comment-item';
                     
-                    // Thiết kế thẻ tròn avatar giống hệt hình ảnh mẫu của bạn
                     div.innerHTML = `
                         <div class="comment-avatar">
-                            <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
-                                <circle cx="16" cy="12" r="6" fill="#10b981"/>
-                                <path d="M6 26C6 20.4772 10.4772 16 16 16C21.5228 16 26 20.4772 26 26" fill="#10b981"/>
+                            <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+                                <circle cx="16" cy="12" r="6" fill="#8c6c50"/>
+                                <path d="M6 26C6 20.4772 10.4772 16 16 16C21.5228 16 26 20.4772 26 26" fill="#8c6c50"/>
                             </svg>
                         </div>
                         <div class="comment-info-box">
@@ -393,7 +524,7 @@
                     `;
                     listContainer.appendChild(div);
                 });
-                listContainer.scrollTop = listContainer.scrollHeight; // Cuộn xuống cuối
+                listContainer.scrollTop = listContainer.scrollHeight;
             }
         }
 
@@ -406,7 +537,7 @@
             
             const authorName = localStorage.getItem('site_user_nickname') || 'Độc giả ẩn danh';
             
-            // Giờ giấc chuẩn 12h sáng/chiều giống hình mẫu
+            // Giờ giấc chuẩn 12h AM/PM và ngày bưu điện
             const now = new Date();
             const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: true });
             const dateStr = now.toLocaleDateString('vi-VN');
@@ -419,10 +550,9 @@
             
             textarea.value = '';
             loadParaComments(activeParaIndex);
-            updateAllParaBadges(); // Cập nhật số lượng đếm trên bong bóng
+            updateAllParaBadges(); 
         });
 
-        // Hàm cập nhật đếm số lượng bong bóng
         function updateAllParaBadges() {
             for (let p = 1; p <= totalParagraphs; p++) {
                 const key = `comments_${truyen}_${chuong}_para_${p}`;
@@ -446,7 +576,6 @@
         const commentsList = document.getElementById('comments-list');
         const noComments = document.getElementById('no-comments');
 
-        // Đồng bộ Đăng nhập ngoài Trang Chủ
         const savedUser = localStorage.getItem('site_user_nickname');
         if(savedUser) {
             nameInput.value = savedUser;

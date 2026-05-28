@@ -16,24 +16,26 @@
         .nav-btn { color: var(--btn-color); text-decoration: none; }
         h1 { font-family: 'Playfair Display', serif; font-size: 26px; text-align: center; margin-bottom: 10px; }
         .story-title-sub { text-align: center; font-size: 13px; color: var(--text-sub); text-transform: uppercase; margin-bottom: 40px; letter-spacing: 1px; }
-        
-        /* Khung đọc truyện chữ chính */
         .content-area { font-size: 18px; line-height: 1.8; text-align: justify; color: #222; }
         .content-area p { margin-bottom: 25px; text-indent: 20px; }
-        
-        /* Khung chú thích của Editor */
         .editor-note { background-color: #f1ede4; border-left: 4px solid var(--btn-color); padding: 15px 20px; font-size: 15px; color: #5c6b5d; font-style: italic; margin-bottom: 30px; border-radius: 0 6px 6px 0; line-height: 1.6; }
         .inner-divider { border: none; border-top: 1px dashed var(--divider); width: 40%; margin: 40px auto; }
-        
-        .footer-nav { border-top: 1px solid var(--divider); padding-top: 30px; margin-top: 40px; display: flex; justify-content: space-between; }
+        .footer-nav { border-top: 1px solid var(--divider); padding-top: 30px; margin-top: 40px; display: flex; justify-content: space-between; margin-bottom: 40px; }
         .footer-btn { background-color: var(--btn-color); color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; font-size: 13px; text-transform: uppercase; text-decoration: none; }
         
-        /* Giao diện khi bị lỗi không tìm thấy chương */
+        /* Khung bình luận */
+        .comments-section { border-top: 1px solid var(--divider); padding-top: 40px; margin-top: 40px; }
+        .comments-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text-main); margin-bottom: 20px; font-weight: 600; }
+        
         .error-box { text-align: center; padding: 20px; }
         .error-box h3 { margin-bottom: 15px; color: #8c6239; }
     </style>
 </head>
 <body>
+    <!-- SDK Facebook để chạy tính năng bình luận -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0"></script>
+
     <div class="container" id="reader-container">
         <div class="navigation-links">
             <a href="#" id="toc-link" class="nav-btn">🗂 Mục Lục</a>
@@ -43,34 +45,32 @@
         <h1 id="chapter-title">Đang tải nội dung...</h1>
         <div class="story-title-sub" id="story-title">Đang tải...</div>
         
-        <div class="content-area" id="content-area">
-            <!-- Chữ truyện từ file .txt sẽ tự động đổ vào đây -->
-        </div>
+        <div class="content-area" id="content-area"></div>
         
         <div class="footer-nav">
             <a href="#" id="prev-btn" class="footer-btn">Chương trước</a>
             <a href="#" id="next-btn" class="footer-btn">Chương sau</a>
         </div>
+
+        <!-- KHUNG BÌNH LUẬN FACEBOOK -->
+        <div class="comments-section">
+            <h3 class="comments-title">Bình luận chương</h3>
+            <div id="fb-comment-box"></div>
+        </div>
     </div>
 
     <script>
-        // Tự động phân tích link web (Ví dụ: doc.html?truyen=vong-tron&chuong=1)
         const params = new URLSearchParams(window.location.search);
         const truyen = params.get('truyen') || 'vong-tron';
         const chuong = parseInt(params.get('chuong')) || 1;
 
-        // Cấu hình tên truyện tương ứng
-        const storyNames = {
-            'vong-tron': 'Vòng Tròn Định Mệnh',
-            // Sau này muốn đăng truyện khác, bạn chỉ cần thêm tên viết tắt và tên đầy đủ ở đây
-        };
+        const storyNames = { 'vong-tron': 'Vòng Tròn Định Mệnh' };
         const storyName = storyNames[truyen] || 'Tên Truyện';
         const tocFile = truyen + '-dinh-menh.html';
 
         document.getElementById('toc-link').href = tocFile;
         document.getElementById('story-title').innerText = storyName;
 
-        // Đường dẫn gọi file .txt từ thư mục dữ liệu
         const txtPath = `${truyen}-data/${truyen}-${chuong}.txt`;
 
         fetch(txtPath)
@@ -80,6 +80,7 @@
             })
             .then(text => {
                 parseAndDisplay(text);
+                loadFacebookComments(); // Gọi bình luận Facebook sau khi tải xong chữ
             })
             .catch(error => {
                 showError(error.message);
@@ -112,7 +113,6 @@
 
             document.getElementById('content-area').innerHTML = htmlContent;
 
-            // Xử lý nút điều hướng
             const prevBtn = document.getElementById('prev-btn');
             if (chuong <= 1) {
                 prevBtn.href = tocFile;
@@ -124,6 +124,18 @@
 
             const nextBtn = document.getElementById('next-btn');
             nextBtn.href = `doc.html?truyen=${truyen}&chuong=${chuong + 1}`;
+        }
+
+        // TỰ ĐỘNG KHỞI TẠO KHUNG BÌNH LUẬN THEO ĐƯỜNG LINK RIÊNG BIỆT CỦA CHƯƠNG ĐÓ
+        function loadFacebookComments() {
+            const currentUrl = window.location.href; // Lấy link chính xác của chương hiện tại
+            const box = document.getElementById('fb-comment-box');
+            box.innerHTML = `<div class="fb-comments" data-href="${currentUrl}" data-width="100%" data-numposts="10" data-colorscheme="light"></div>`;
+            
+            // Ép Facebook quét và hiển thị lại khung bình luận
+            if (typeof FB !== 'undefined') {
+                FB.XFBML.parse();
+            }
         }
 
         function showError(message) {

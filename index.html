@@ -20,26 +20,29 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            font-family: 'Lora', serif; 
-            line-height: 1.6;
-        }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Lora', serif; line-height: 1.6; }
         h1, h2, h3, .logo { font-family: 'Playfair Display', serif; }
         a { text-decoration: none; color: inherit; display: block; }
 
         /* 1. THANH ĐIỀU HƯỚNG NÉT ĐỨT */
-        .nav-container { padding: 30px 20px 0 20px; background-color: white; }
+        .nav-container { padding: 20px 20px 0 20px; background-color: white; position: relative; }
         .nav-box {
             border: 1px dashed var(--text-main); max-width: 900px; margin: 0 auto; padding: 20px;
-            display: flex; justify-content: center; align-items: center; gap: 30px; font-size: 15px; font-weight: 500; letter-spacing: 1px;
+            display: flex; justify-content: center; align-items: center; gap: 30px; font-size: 14px; font-weight: bold; letter-spacing: 1px;
         }
         .nav-box a { color: var(--text-main); transition: 0.2s; display: inline-block; }
         .nav-box a:hover { color: var(--btn-color); }
         .nav-divider { color: var(--divider); }
+        
+        /* NÚT ĐĂNG NHẬP TRÊN THANH MENU */
+        .user-action {
+            position: absolute; right: 30px; top: 38px; font-size: 13px; font-family: sans-serif;
+            background: var(--text-main); color: white; padding: 6px 15px; border-radius: 20px;
+            cursor: pointer; font-weight: bold; transition: 0.2s;
+        }
+        .user-action:hover { background: var(--btn-color); }
 
-        /* 2. BANNER SAO BĂNG */
+        /* BANNER */
         .banner {
             background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200') no-repeat center center;
             background-size: cover; height: 450px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #ffffff; text-align: center; margin-bottom: 60px;
@@ -49,7 +52,7 @@
 
         .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
 
-        /* 3. HERO SPLIT (Tàn tinh hiểu nguyệt) */
+        /* HERO SPLIT */
         .hero-split {
             display: flex; background-color: var(--bg-color); margin-bottom: 80px; border: 1px solid var(--divider); box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
@@ -62,93 +65,87 @@
         .hero-btn { background-color: var(--btn-color); color: #ffffff; border: none; padding: 12px 35px; border-radius: 25px; font-size: 13px; font-weight: bold; letter-spacing: 1px; cursor: pointer; width: fit-content; transition: 0.3s; text-transform: uppercase; display: inline-block; }
         .hero-btn:hover { background-color: var(--btn-hover); }
 
-        /* 4. TRUYỆN MỚI CẬP NHẬT */
+        /* TRUYỆN MỚI CẬP NHẬT */
         .section-title { text-align: center; font-size: 42px; color: var(--text-main); margin-bottom: 50px; font-weight: 500; }
-        
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 35px;
-            margin-bottom: 80px;
-        }
-        .story-update-card {
-            background: var(--card-bg);
-            border: 1px solid var(--divider);
-            padding: 15px; 
-            border-radius: 4px;
-            transition: 0.4s;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        .story-update-card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
-            border-color: var(--text-sub); 
-        }
-        .story-update-img {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            margin-bottom: 18px;
-            border-radius: 2px;
-        }
-        .story-update-info {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex-grow: 1;
-            overflow: hidden;
-        }
-        .story-update-title {
-            font-size: 20px;
-            color: var(--text-main);
-            line-height: 1.4;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        .story-update-tag {
-            font-size: 11px;
-            color: #8c6239;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            font-family: sans-serif;
-            font-weight: bold;
-            white-space: nowrap; 
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-            display: block;
-        }
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; margin-bottom: 80px; }
+        .story-update-card { background: var(--card-bg); border: 1px solid var(--divider); padding: 15px; border-radius: 4px; transition: 0.4s; display: flex; flex-direction: column; cursor: pointer; }
+        .story-update-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-color: var(--text-sub); }
+        .story-update-img { width: 100%; height: 380px; object-fit: cover; margin-bottom: 18px; border-radius: 2px; }
+        .story-update-info { text-align: center; display: flex; flex-direction: column; justify-content: center; flex-grow: 1; overflow: hidden; }
+        .story-update-title { font-size: 20px; color: var(--text-main); line-height: 1.4; font-weight: 600; margin-bottom: 5px; }
+        .story-update-tag { font-size: 11px; color: #8c6239; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-family: sans-serif; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
 
-        /* 5. KHUNG BÌNH LUẬN FACEBOOK TRANG CHỦ */
-        .comments-section { 
-            border-top: 1px solid var(--divider); 
-            padding-top: 50px; 
-            margin-bottom: 80px; 
+        /* KHUNG BÌNH LUẬN GỐC */
+        .comments-section { border-top: 1px solid var(--divider); padding-top: 50px; margin-bottom: 80px; }
+        .comments-title { font-size: 20px; color: var(--text-main); margin-bottom: 25px; font-weight: 600; }
+        .comment-input-box { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; margin-bottom: 40px; }
+        .comment-name-input { width: 100%; padding: 12px 15px; background-color: var(--card-bg); border: 1px solid var(--divider); border-radius: 4px; font-family: 'Lora', serif; font-size: 14px; outline: none; color: #222; }
+        .comment-input { width: 100%; height: 90px; padding: 15px; background-color: var(--card-bg); border: 1px solid var(--divider); border-radius: 4px; font-family: 'Lora', serif; font-size: 14px; resize: none; outline: none; color: #222; }
+        .comment-name-input::placeholder, .comment-input::placeholder { color: #9ba89c; font-style: italic; }
+        .btn-submit-comment { background-color: var(--text-main); color: white; border: none; padding: 8px 20px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-submit-comment:hover { background-color: var(--btn-color); }
+        .comments-list { margin-top: 30px; }
+        .comment-item { background: var(--card-bg); border: 1px solid var(--divider); padding: 20px; border-radius: 4px; margin-bottom: 15px; position: relative; text-align: left; }
+        .comment-header { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #777; margin-bottom: 8px; border-bottom: 1px dashed var(--divider); padding-bottom: 8px; }
+        .comment-author { font-weight: bold; color: var(--btn-color); font-size: 14px;}
+        .comment-date { margin-left: 10px; }
+        .comment-body { font-size: 14px; line-height: 1.5; color: #222; }
+        .btn-delete { color: #ef4444; cursor: pointer; font-size: 12px; transition: 0.2s; font-weight: bold; font-family: sans-serif; }
+        .btn-delete:hover { color: #b91c1c; text-decoration: underline; }
+        .no-comments { text-align: center; padding: 20px 0; }
+        .no-comments h4 { font-size: 16px; color: var(--text-main); margin-bottom: 5px; }
+        .no-comments p { font-size: 13px; color: #888; }
+
+        /* GIAO DIỆN KHUNG POPUP ĐĂNG KÝ (GIỐNG ẢNH YÊU CẦU) */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000;
+            backdrop-filter: blur(2px);
         }
-        .comments-title { 
-            font-size: 20px; 
-            color: var(--text-main); 
-            margin-bottom: 25px; 
-            font-weight: 600; 
+        .modal-box {
+            background: white; width: 400px; padding: 30px 40px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; font-family: sans-serif;
+            border: 3px solid #bceadd; /* Viền xanh bạc hà nhạt */
         }
+        .close-btn {
+            position: absolute; top: 15px; right: 20px; font-size: 20px; font-weight: bold;
+            color: #0d4a68; cursor: pointer;
+        }
+        .modal-title {
+            text-align: center; font-size: 18px; color: #0d4a68; font-weight: 800;
+            margin-bottom: 25px; border-bottom: 2px solid #bceadd; padding-bottom: 15px; letter-spacing: 1px;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; color: #0d4a68; font-weight: bold; margin-bottom: 8px; }
+        .form-group input {
+            width: 100%; padding: 12px 15px; border: 2px solid #bceadd; border-radius: 8px;
+            font-size: 14px; outline: none; transition: 0.3s; color: #333; font-weight: 500;
+        }
+        .form-group input:focus { border-color: #55b29b; }
+        .btn-register {
+            width: 100%; background: #fc4b78; color: white; border: none; padding: 15px;
+            border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px;
+            transition: 0.2s;
+        }
+        .btn-register:hover { background: #e03662; }
+        .modal-footer { text-align: center; margin-top: 15px; font-size: 12px; color: #555; }
+        .modal-footer a { color: #55b29b; text-decoration: underline; cursor: pointer; display: inline; }
 
         @media (max-width: 768px) {
             .hero-split { flex-direction: column; }
             .cards-grid { grid-template-columns: 1fr; gap: 25px; }
-            .nav-box { gap: 15px; font-size: 13px; }
-            .story-update-img { height: 450px; }
+            .nav-box { flex-wrap: wrap; gap: 10px; font-size: 12px; }
+            .user-action { position: static; display: block; margin: 15px auto 0 auto; text-align: center; width: fit-content; }
+            .modal-box { width: 90%; padding: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- SDK Facebook để chạy tính năng bình luận -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0"></script>
 
     <div class="nav-container">
+        <!-- Nút Gọi Popup Đăng Ký -->
+        <div class="user-action" id="header-user-btn" onclick="openModal()">👤 ĐĂNG KÝ / ĐĂNG NHẬP</div>
+        
         <div class="nav-box">
             <a href="index.html" style="display:inline-block">TRANG CHỦ</a>
             <span class="nav-divider">|</span>
@@ -178,27 +175,22 @@
         <h2 class="section-title">Truyện mới cập nhật</h2>
         
         <div class="cards-grid">
-            <!-- Truyện 1: Vòng Tròn Định Mệnh (CÓ TỰ ĐỘNG ĐỒNG BỘ CHƯƠNG) -->
             <a href="vong-tron-dinh-menh.html" class="story-update-card">
-                <img src="https://i.pinimg.com/736x/21/df/b8/21dfb85f2f5fc2dc88cd0a894a413d78.jpg" alt="Bìa truyện 1" class="story-update-img">
+                <img src="bia-vong-tron.jpg" alt="Bìa truyện 1" class="story-update-img" onerror="this.src='https://images.unsplash.com/photo-1618666012174-83b441c0bc76?w=400&q=80'">
                 <div class="story-update-info">
-                    <span class="story-update-tag" id="tag-vong-tron">Đang tải chương mới...</span>
+                    <span class="story-update-tag" id="tag-vong-tron">Đang kiểm tra chương...</span>
                     <h3 class="story-update-title">Vòng Tròn Định Mệnh</h3>
                 </div>
             </a>
-
-            <!-- Truyện 2 -->
             <a href="#" class="story-update-card">
-                <img src="https://i.pinimg.com/736x/8f/3e/16/8f3e16447c216c59bba6ed22d4f5d817.jpg" alt="Bìa truyện 2" class="story-update-img">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" alt="Bìa truyện 2" class="story-update-img">
                 <div class="story-update-info">
                     <span class="story-update-tag">Sắp ra mắt</span>
                     <h3 class="story-update-title">Đợi em thi đại học xong đã</h3>
                 </div>
             </a>
-
-            <!-- Truyện 3 -->
             <a href="#" class="story-update-card">
-                <img src="https://i.pinimg.com/736x/91/92/df/9192df4da69fbafc1483dc47f8baab4c.jpg" alt="Bìa truyện 3" class="story-update-img">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&q=80" alt="Bìa truyện 3" class="story-update-img">
                 <div class="story-update-info">
                     <span class="story-update-tag">Đã hoàn thành</span>
                     <h3 class="story-update-title">Át Bích</h3>
@@ -206,17 +198,155 @@
             </a>
         </div>
 
-        <!-- KHUNG BÌNH LUẬN FACEBOOK TRANG CHỦ -->
+        <!-- PHẦN BÌNH LUẬN GỐC (ĐÃ SỬA LẠI HOÀN TOÀN TRÁNH BỊ TRẮNG XÓA) -->
         <div class="comments-section">
-            <h3 class="comments-title">Bình luận trang chủ</h3>
-            <!-- Nhúng khung bình luận của Facebook -->
-            <div class="fb-comments" data-href="https://canxingxiaoyue.github.io/gaygay1234/" data-width="100%" data-numposts="10"></div>
+            <h3 class="comments-title">Góc Tâm Tình</h3>
+            <div class="comment-input-box">
+                <input type="text" class="comment-name-input" id="comment-name" placeholder="Tên của bạn (bỏ trống sẽ là Ẩn danh)">
+                <textarea class="comment-input" id="comment-input" placeholder="Viết bình luận của bạn vào đây nhé..."></textarea>
+                <button class="btn-submit-comment" id="comment-submit">Gửi bình luận</button>
+            </div>
+            <div class="no-comments" id="no-comments">
+                <h4>Chia sẻ suy nghĩ của bạn</h4>
+                <p>Hãy là người đầu tiên viết bình luận.</p>
+            </div>
+            <div class="comments-list" id="comments-list"></div>
         </div>
 
     </div>
 
-    <!-- SCRIPT TỰ ĐỘNG ĐỒNG BỘ CHƯƠNG MỚI NHẤT -->
+    <!-- KHUNG POPUP ĐĂNG KÝ -->
+    <div class="modal-overlay" id="register-modal">
+        <div class="modal-box">
+            <div class="close-btn" onclick="closeModal()">X</div>
+            <div class="modal-title">ĐĂNG KÝ THÀNH VIÊN</div>
+            
+            <div class="form-group">
+                <label>👤 BIỆT DANH CỦA BẠN:</label>
+                <input type="text" id="reg-nickname" placeholder="Nhập biệt danh hiển thị...">
+            </div>
+            <div class="form-group">
+                <label>✉️ ĐỊA CHỈ EMAIL:</label>
+                <input type="email" id="reg-email" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label>🔑 MẬT KHẨU TỰ CHỌN:</label>
+                <input type="password" id="reg-pass" placeholder="Tự chọn mật khẩu riêng...">
+            </div>
+            
+            <button class="btn-register" onclick="handleRegister()">ĐĂNG KÝ TÀI KHOẢN</button>
+            
+            <div class="modal-footer">
+                Đã có tài khoản rồi? <a onclick="alert('Tính năng đang bảo trì')">Bấm vào đây để Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // --- XỬ LÝ KHUNG ĐĂNG KÝ GIẢ LẬP ---
+        const modal = document.getElementById('register-modal');
+        const headerBtn = document.getElementById('header-user-btn');
+        const commentNameInput = document.getElementById('comment-name');
+
+        function openModal() { modal.style.display = 'flex'; }
+        function closeModal() { modal.style.display = 'none'; }
+
+        // Kiểm tra đăng nhập
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedUser = localStorage.getItem('site_user_nickname');
+            if(savedUser) {
+                headerBtn.innerText = "👋 Chào, " + savedUser;
+                commentNameInput.value = savedUser; 
+                commentNameInput.disabled = true; 
+            }
+        });
+
+        function handleRegister() {
+            const nickname = document.getElementById('reg-nickname').value.trim();
+            if(!nickname) return alert("Vui lòng nhập Biệt danh!");
+            
+            localStorage.setItem('site_user_nickname', nickname);
+            
+            alert("Đăng ký thành công! Chào mừng " + nickname);
+            closeModal();
+            
+            headerBtn.innerText = "👋 Chào, " + nickname;
+            commentNameInput.value = nickname;
+            commentNameInput.disabled = true;
+        }
+
+        // --- XỬ LÝ BÌNH LUẬN ---
+        const commentInput = document.getElementById('comment-input');
+        const commentSubmit = document.getElementById('comment-submit');
+        const commentsList = document.getElementById('comments-list');
+        const noComments = document.getElementById('no-comments');
+
+        document.addEventListener("DOMContentLoaded", loadComments);
+
+        function loadComments() {
+            let comments = JSON.parse(localStorage.getItem('story_blog_comments_v2') || '[]');
+            let modified = false;
+            comments = comments.map(c => {
+                if (!c.id) { c.id = Math.floor(Math.random() * 10000000); modified = true; }
+                return c;
+            });
+            if(modified) localStorage.setItem('story_blog_comments_v2', JSON.stringify(comments));
+
+            if (comments.length > 0) {
+                noComments.style.display = 'none';
+                commentsList.innerHTML = '';
+                comments.forEach(c => appendCommentDOM(c.id, c.name, c.text, c.date));
+            } else {
+                noComments.style.display = 'block';
+                commentsList.innerHTML = '';
+            }
+        }
+
+        function appendCommentDOM(id, name, text, date) {
+            const div = document.createElement('div');
+            div.className = 'comment-item';
+            div.id = 'comment-' + id;
+            div.innerHTML = `
+                <div class="comment-header">
+                    <div>
+                        <span class="comment-author">${name}</span>
+                        <span class="comment-date">${date}</span>
+                    </div>
+                    <span class="btn-delete" onclick="deleteComment(${id})">Xóa</span>
+                </div>
+                <div class="comment-body">${text}</div>
+            `;
+            commentsList.prepend(div);
+        }
+
+        commentSubmit.addEventListener('click', () => {
+            const text = commentInput.value.trim();
+            const authorName = commentNameInput.value.trim() || 'Độc giả ẩn danh'; 
+            if (!text) return alert("Vui lòng nhập nội dung bình luận!");
+            
+            const dateStr = new Date().toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
+            const newId = Date.now();
+
+            let comments = JSON.parse(localStorage.getItem('story_blog_comments_v2') || '[]');
+            comments.push({ id: newId, name: authorName, text: text, date: dateStr });
+            localStorage.setItem('story_blog_comments_v2', JSON.stringify(comments));
+            
+            noComments.style.display = 'none';
+            appendCommentDOM(newId, authorName, text, dateStr);
+            commentInput.value = '';
+        });
+
+        function deleteComment(id) {
+            if(!confirm("Bạn có chắc chắn muốn xóa bình luận này không?")) return;
+            let comments = JSON.parse(localStorage.getItem('story_blog_comments_v2') || '[]');
+            comments = comments.filter(c => c.id !== id);
+            localStorage.setItem('story_blog_comments_v2', JSON.stringify(comments));
+            const commentEl = document.getElementById('comment-' + id);
+            if(commentEl) commentEl.remove();
+            if(comments.length === 0) noComments.style.display = 'block';
+        }
+
+        // --- ĐỒNG BỘ CHƯƠNG MỚI ---
         function autoUpdateLatestChapter(tocUrl, tagId) {
             fetch(tocUrl)
                 .then(response => {
@@ -227,7 +357,6 @@
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
                     const chapters = doc.querySelectorAll('.chapter-btn');
-                    
                     if(chapters.length > 0) {
                         let lastChapterText = chapters[chapters.length - 1].innerText;
                         document.getElementById(tagId).innerText = "Mới nhất: " + lastChapterText;
@@ -239,8 +368,6 @@
                     document.getElementById(tagId).innerText = "Mới nhất: Đang cập nhật...";
                 });
         }
-
-        // Chạy đồng bộ chương mới nhất
         autoUpdateLatestChapter('vong-tron-dinh-menh.html', 'tag-vong-tron');
     </script>
 </body>

@@ -11,97 +11,259 @@
             --btn-color: #8c6239; --card-bg: #fefdfa; --divider: #e0dcd2;
         }
         body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Lora', serif; padding: 40px 20px; }
-        .container { max-width: 700px; margin: 0 auto; background: var(--card-bg); padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        
+        /* BỐ CỤC CHIA HAI CỘT ĐỂ HIỂN THỊ SIDEBAR BÌNH LUẬN ĐOẠN */
+        .main-wrapper {
+            display: flex;
+            max-width: 720px; /* Mặc định căn giữa khi không có bình luận đoạn */
+            margin: 0 auto;
+            gap: 25px;
+            align-items: flex-start;
+            transition: max-width 0.3s ease;
+        }
+        .main-wrapper.sidebar-open {
+            max-width: 1120px; /* Mở rộng khi bật bình luận đoạn */
+        }
+
+        .container { 
+            flex: 1; 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+            transition: all 0.3s ease;
+        }
         .navigation-links { display: flex; justify-content: space-between; margin-bottom: 30px; font-size: 13px; text-transform: uppercase; font-weight: bold; }
         .nav-btn { color: var(--btn-color); text-decoration: none; }
         h1 { font-family: 'Playfair Display', serif; font-size: 26px; text-align: center; margin-bottom: 10px; }
         .story-title-sub { text-align: center; font-size: 13px; color: var(--text-sub); text-transform: uppercase; margin-bottom: 40px; letter-spacing: 1px; }
         
-        /* KHUNG ĐỌC TRUYỆN CHỮ CHÍNH */
+        /* PHẦN ĐỌC CHỮ TRUYỆN CHÍNH */
         .content-area { font-size: 18px; line-height: 1.8; text-align: justify; color: #222; }
-        .content-area p { margin-bottom: 25px; text-indent: 20px; }
-        
-        /* CHÚ THÍCH EDITOR & ĐƯỜNG KẺ */
-        .editor-note { background-color: #f1ede4; border-left: 4px solid var(--btn-color); padding: 15px 20px; font-size: 15px; color: #5c6b5d; font-style: italic; margin-bottom: 30px; border-radius: 0 6px 6px 0; line-height: 1.6; }
         .inner-divider { border: none; border-top: 1px dashed var(--divider); width: 40%; margin: 40px auto; }
+        .editor-note { background-color: #f1ede4; border-left: 4px solid var(--btn-color); padding: 15px 20px; font-size: 15px; color: #5c6b5d; font-style: italic; margin-bottom: 30px; border-radius: 0 6px 6px 0; line-height: 1.6; }
+
+        /* ĐỊNH DẠNG TỪNG ĐOẠN VĂN ĐỂ BẤM BÌNH LUẬN (GIỐNG HỆT ẢNH MẪU) */
+        .story-paragraph {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .story-paragraph:hover {
+            background-color: #f1ede4;
+            border-color: #e0dcd2;
+        }
+        .story-para-text {
+            flex-grow: 1;
+            text-align: justify;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #222;
+        }
         
-        /* NÚT CHUYỂN CHƯƠNG */
+        /* Bong bóng đếm số bình luận đoạn */
+        .para-badge {
+            background-color: #cbd5e1; /* Màu xám khi chưa có bình luận */
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            flex-shrink: 0;
+            font-family: sans-serif;
+            transition: 0.2s;
+        }
+        .para-badge.has-comments {
+            background-color: #a7f3d0; /* Màu xanh khi đã có bình luận */
+            color: #065f46;
+        }
+
+        /* GIAO DIỆN THANH TRƯỢT SIDEBAR BÊN PHẢI (GIỐNG HỆT ẢNH MẪU) */
+        .para-sidebar {
+            width: 360px;
+            background: var(--card-bg);
+            border: 1px solid var(--divider);
+            border-radius: 8px;
+            padding: 24px;
+            position: sticky;
+            top: 20px;
+            display: none; /* Ẩn đi mặc định, hiện lên khi click */
+            flex-direction: column;
+            height: calc(100vh - 40px);
+            max-height: 600px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .main-wrapper.sidebar-open .para-sidebar {
+            display: flex; /* Hiện lên khi có class sidebar-open */
+        }
+        
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #bceadd;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        .sidebar-title { font-size: 15px; font-weight: bold; color: #0d4a68; font-family: sans-serif; }
+        .sidebar-close { font-size: 13px; font-weight: bold; color: #ef4444; cursor: pointer; font-family: sans-serif; }
+        
+        /* Trích dẫn đoạn văn */
+        .sidebar-quote {
+            border-left: 3px solid #10b981;
+            padding-left: 10px;
+            font-style: italic;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 20px;
+            text-align: left;
+            line-height: 1.5;
+        }
+        
+        /* Danh sách bình luận đoạn */
+        .sidebar-comments-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 5px;
+        }
+        
+        /* Thẻ bình luận tròn giống hệt ảnh của bạn */
+        .sidebar-comment-item {
+            display: flex;
+            gap: 12px;
+            background-color: #f5f4ef;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #e0dcd2;
+            align-items: flex-start;
+        }
+        .comment-avatar {
+            width: 32px; height: 32px; border-radius: 50%; background: #d1fae5;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .comment-info-box { flex-grow: 1; }
+        .comment-user-name { font-weight: bold; font-size: 13px; color: #2b3a2e; font-family: sans-serif; }
+        .comment-date-time { font-size: 10px; color: #999; float: right; font-family: sans-serif; margin-top: 2px; }
+        .comment-text { font-size: 13px; color: #444; margin-top: 4px; line-height: 1.4; }
+        .comment-reply-btn { font-size: 11px; color: #10b981; font-weight: bold; margin-top: 5px; display: inline-block; font-family: sans-serif; }
+
+        /* Ô nhập bình luận ở cuối Sidebar */
+        .sidebar-input-box {
+            border-top: 1px solid var(--divider);
+            padding-top: 15px;
+        }
+        .sidebar-textarea {
+            width: 100%; height: 60px; padding: 10px; border: 1px solid var(--divider);
+            border-radius: 6px; font-family: 'Lora', serif; font-size: 13px; resize: none; outline: none; background: var(--bg-color);
+        }
+        .sidebar-submit-btn {
+            width: 100%; background-color: #10b981; color: white; border: none; padding: 10px;
+            border-radius: 6px; font-weight: bold; margin-top: 8px; cursor: pointer; font-size: 12px;
+            text-transform: uppercase; transition: 0.2s; font-family: sans-serif;
+        }
+        .sidebar-submit-btn:hover { background-color: #059669; }
+
+        /* Điều hướng và bình luận chương bên dưới */
         .footer-nav { border-top: 1px solid var(--divider); padding-top: 30px; margin-top: 40px; display: flex; justify-content: space-between; margin-bottom: 40px; }
         .footer-btn { background-color: var(--btn-color); color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; font-size: 13px; text-transform: uppercase; text-decoration: none; }
         
-        /* KHUNG BÌNH LUẬN TRONG TRANG ĐỌC */
         .comments-section { border-top: 1px solid var(--divider); padding-top: 40px; margin-top: 40px; }
         .comments-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text-main); margin-bottom: 25px; font-weight: 600; }
-        
         .comment-input-box { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; margin-bottom: 40px; }
         .comment-name-input { width: 100%; padding: 12px 15px; background-color: var(--bg-color); border: 1px solid var(--divider); border-radius: 4px; font-family: 'Lora', serif; font-size: 14px; outline: none; color: #222; }
         .comment-input { width: 100%; height: 90px; padding: 15px; background-color: var(--bg-color); border: 1px solid var(--divider); border-radius: 4px; font-family: 'Lora', serif; font-size: 14px; resize: none; outline: none; color: #222; }
         .comment-name-input::placeholder, .comment-input::placeholder { color: #9ba89c; font-style: italic; }
         .btn-submit-comment { background-color: var(--text-main); color: white; border: none; padding: 8px 20px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .btn-submit-comment:hover { background-color: var(--btn-color); }
-        
         .comments-list { margin-top: 30px; }
         .comment-item { background: var(--bg-color); border: 1px solid var(--divider); padding: 20px; border-radius: 4px; margin-bottom: 15px; position: relative; text-align: left; }
         .comment-header { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #777; margin-bottom: 8px; border-bottom: 1px dashed var(--divider); padding-bottom: 8px; }
         .comment-author { font-weight: bold; color: var(--btn-color); font-size: 14px;}
         .comment-date { margin-left: 10px; }
         .comment-body { font-size: 14px; line-height: 1.5; color: #222; text-align: left; }
-        
         .btn-delete { color: #ef4444; cursor: pointer; font-size: 12px; transition: 0.2s; font-weight: bold; font-family: sans-serif; }
         .btn-delete:hover { color: #b91c1c; text-decoration: underline; }
-
         .no-comments { text-align: center; padding: 20px 0; }
         .no-comments h4 { font-size: 16px; color: var(--text-main); margin-bottom: 5px; }
         .no-comments p { font-size: 13px; color: #888; }
-
         .error-box { text-align: center; padding: 20px; }
         .error-box h3 { margin-bottom: 15px; color: #8c6239; }
     </style>
 </head>
 <body>
 
-    <div class="container" id="reader-container">
-        <!-- Điều hướng đầu trang -->
-        <div class="navigation-links">
-            <a href="#" id="toc-link" class="nav-btn">🗂 Mục Lục</a>
-            <a href="index.html" class="nav-btn">🏠 Trang Chủ</a>
-        </div>
+    <div class="main-wrapper" id="main-wrapper">
         
-        <h1 id="chapter-title">Đang tải nội dung...</h1>
-        <div class="story-title-sub" id="story-title">Đang tải...</div>
-        
-        <!-- Nội dung chương -->
-        <div class="content-area" id="content-area"></div>
-        
-        <!-- Nút chuyển chương -->
-        <div class="footer-nav">
-            <a href="#" id="prev-btn" class="footer-btn">Chương trước</a>
-            <a href="#" id="next-btn" class="footer-btn">Chương sau</a>
-        </div>
-
-        <!-- KHUNG BÌNH LUẬN RIÊNG BIỆT CHO TỪNG CHƯƠNG -->
-        <div class="comments-section">
-            <h3 class="comments-title">Bình luận chương</h3>
+        <!-- CỘT TRÁI: KHUNG ĐỌC TRUYỆN CHÍNH -->
+        <div class="container" id="reader-container">
+            <div class="navigation-links">
+                <a href="#" id="toc-link" class="nav-btn">🗂 Mục Lục</a>
+                <a href="index.html" class="nav-btn">🏠 Trang Chủ</a>
+            </div>
             
-            <div class="comment-input-box">
-                <input type="text" class="comment-name-input" id="comment-name" placeholder="Tên của bạn (bỏ trống sẽ là Ẩn danh)">
-                <textarea class="comment-input" id="comment-input" placeholder="Viết bình luận chương này tại đây nhé..."></textarea>
-                <button class="btn-submit-comment" id="comment-submit">Gửi bình luận</button>
+            <h1 id="chapter-title">Đang tải nội dung...</h1>
+            <div class="story-title-sub" id="story-title">Đang tải...</div>
+            
+            <!-- Nội dung chữ truyện -->
+            <div class="content-area" id="content-area"></div>
+            
+            <div class="footer-nav">
+                <a href="#" id="prev-btn" class="footer-btn">Chương trước</a>
+                <a href="#" id="next-btn" class="footer-btn">Chương sau</a>
             </div>
 
-            <div class="no-comments" id="no-comments">
-                <h4>Chia sẻ suy nghĩ của bạn về chương này</h4>
-                <p>Hãy là người đầu tiên viết bình luận cho chương này.</p>
-            </div>
-
-            <div class="comments-list" id="comments-list">
-                <!-- Bình luận của chương này sẽ tự động tải vào đây -->
+            <!-- Khung bình luận toàn bộ chương bên dưới -->
+            <div class="comments-section">
+                <h3 class="comments-title">Bình luận chương</h3>
+                <div class="comment-input-box">
+                    <input type="text" class="comment-name-input" id="comment-name" placeholder="Tên của bạn (bỏ trống sẽ là Ẩn danh)">
+                    <textarea class="comment-input" id="comment-input" placeholder="Viết bình luận chương tại đây nhé..."></textarea>
+                    <button class="btn-submit-comment" id="comment-submit">Gửi bình luận</button>
+                </div>
+                <div class="no-comments" id="no-comments">
+                    <h4>Chia sẻ suy nghĩ của bạn về chương này</h4>
+                    <p>Hãy là người đầu tiên viết bình luận cho chương này.</p>
+                </div>
+                <div class="comments-list" id="comments-list"></div>
             </div>
         </div>
+
+        <!-- CỘT PHẢI: SIDEBAR BÌNH LUẬN ĐOẠN (GIỐNG HỆT ẢNH MẪU CỦA BẠN) -->
+        <div class="para-sidebar" id="para-sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title" id="sidebar-para-title">💬 Bình luận Đoạn 1</span>
+                <span class="sidebar-close" onclick="closeParaComments()">[Đóng X]</span>
+            </div>
+            
+            <!-- Trích dẫn đoạn văn đang bấm -->
+            <div class="sidebar-quote" id="sidebar-quote">"Giới thiệu"</div>
+            
+            <!-- Danh sách bình luận đoạn -->
+            <div class="sidebar-comments-list" id="sidebar-comments-list"></div>
+            
+            <!-- Khung nhập bình luận đoạn -->
+            <div class="sidebar-input-box">
+                <textarea class="sidebar-textarea" id="sidebar-textarea" placeholder="Bình luận về đoạn văn này..."></textarea>
+                <button class="sidebar-submit-btn" id="sidebar-submit-btn">GỬI CMT ĐOẠN</button>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // Phân tích tham số URL
         const params = new URLSearchParams(window.location.search);
         const truyen = params.get('truyen') || 'vong-tron';
         const chuong = parseInt(params.get('chuong')) || 1;
@@ -113,10 +275,10 @@
         document.getElementById('toc-link').href = tocFile;
         document.getElementById('story-title').innerText = storyName;
 
-        // Khóa lưu trữ bình luận riêng biệt cho từng chương: comments_vong-tron_1, comments_vong-tron_2...
         const commentStorageKey = `comments_${truyen}_${chuong}`;
-
         const txtPath = `${truyen}-data/${truyen}-${chuong}.txt`;
+
+        let totalParagraphs = 0; // Để đếm tổng số đoạn văn trong chương
 
         // Tải nội dung chương
         fetch(txtPath)
@@ -126,7 +288,8 @@
             })
             .then(text => {
                 parseAndDisplay(text);
-                loadComments(); // Tải bình luận riêng của chương này sau khi đọc truyện xong
+                loadComments(); // Tải bình luận chương
+                updateAllParaBadges(); // Cập nhật số đếm bong bóng bình luận đoạn
             })
             .catch(error => {
                 showError(error.message);
@@ -153,7 +316,14 @@
                     htmlContent += "            <div class=\"editor-note\">" + cleanNote + "</div>\n";
                 } 
                 else {
-                    htmlContent += "            <p>" + trimmed + "</p>\n";
+                    // TĂNG ĐOẠN VĂN ĐỂ GẮN SỰ KIỆN CLICK BÌNH LUẬN ĐOẠN
+                    totalParagraphs++;
+                    const safeText = trimmed.replace(/"/g, '&quot;'); // Né lỗi dấu ngoặc kép
+                    htmlContent += `
+                    <div class="story-paragraph" onclick="openParaComments(${totalParagraphs}, this)" data-para-text="${safeText}">
+                        <span class="story-para-text">${trimmed}</span>
+                        <span class="para-badge" id="badge-${totalParagraphs}">0</span>
+                    </div>\n`;
                 }
             });
 
@@ -172,24 +342,119 @@
             nextBtn.href = `doc.html?truyen=${truyen}&chuong=${chuong + 1}`;
         }
 
-        // --- XỬ LÝ BÌNH LUẬN RIÊNG TỪNG CHƯƠNG ---
+        // --- 1. XỬ LÝ BÌNH LUẬN ĐOẠN TRƯỢT SIDEBAR ---
+        let activeParaIndex = null;
+
+        function openParaComments(paraIndex, element) {
+            activeParaIndex = paraIndex;
+            const paraText = element.getAttribute('data-para-text');
+            
+            // Mở rộng Layout và hiện Sidebar bên phải
+            document.getElementById('main-wrapper').classList.add('sidebar-open');
+            document.getElementById('sidebar-para-title').innerText = `💬 Bình luận Đoạn ${paraIndex}`;
+            document.getElementById('sidebar-quote').innerText = `"${paraText}"`;
+            
+            loadParaComments(paraIndex);
+        }
+
+        function closeParaComments() {
+            document.getElementById('main-wrapper').classList.remove('sidebar-open');
+            activeParaIndex = null;
+        }
+
+        // Tải bình luận đoạn từ LocalStorage
+        function loadParaComments(paraIndex) {
+            const key = `comments_${truyen}_${chuong}_para_${paraIndex}`;
+            const comments = JSON.parse(localStorage.getItem(key) || '[]');
+            const listContainer = document.getElementById('sidebar-comments-list');
+            listContainer.innerHTML = '';
+            
+            if (comments.length === 0) {
+                listContainer.innerHTML = '<div style="text-align:center; color:#999; font-size:13px; padding:35px 0;">Chưa có bình luận nào cho đoạn này.</div>';
+            } else {
+                comments.forEach(c => {
+                    const div = document.createElement('div');
+                    div.className = 'sidebar-comment-item';
+                    
+                    // Thiết kế thẻ tròn avatar giống hệt hình ảnh mẫu của bạn
+                    div.innerHTML = `
+                        <div class="comment-avatar">
+                            <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+                                <circle cx="16" cy="12" r="6" fill="#10b981"/>
+                                <path d="M6 26C6 20.4772 10.4772 16 16 16C21.5228 16 26 20.4772 26 26" fill="#10b981"/>
+                            </svg>
+                        </div>
+                        <div class="comment-info-box">
+                            <span class="comment-date-time">${c.date}</span>
+                            <div class="comment-user-name">${c.name}</div>
+                            <div class="comment-text">${c.text}</div>
+                            <a href="#" class="comment-reply-btn" onclick="alert('Tính năng đang phát triển!')">↳ Trả lời</a>
+                        </div>
+                    `;
+                    listContainer.appendChild(div);
+                });
+                listContainer.scrollTop = listContainer.scrollHeight; // Cuộn xuống cuối
+            }
+        }
+
+        // Gửi bình luận đoạn văn
+        document.getElementById('sidebar-submit-btn').addEventListener('click', () => {
+            if (!activeParaIndex) return;
+            const textarea = document.getElementById('sidebar-textarea');
+            const text = textarea.value.trim();
+            if (!text) return alert("Vui lòng nhập nội dung bình luận!");
+            
+            const authorName = localStorage.getItem('site_user_nickname') || 'Độc giả ẩn danh';
+            
+            // Giờ giấc chuẩn 12h sáng/chiều giống hình mẫu
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: true });
+            const dateStr = now.toLocaleDateString('vi-VN');
+            const finalDate = `${timeStr} - ${dateStr}`;
+            
+            const key = `comments_${truyen}_${chuong}_para_${activeParaIndex}`;
+            const comments = JSON.parse(localStorage.getItem(key) || '[]');
+            comments.push({ name: authorName, text: text, date: finalDate });
+            localStorage.setItem(key, JSON.stringify(comments));
+            
+            textarea.value = '';
+            loadParaComments(activeParaIndex);
+            updateAllParaBadges(); // Cập nhật số lượng đếm trên bong bóng
+        });
+
+        // Hàm cập nhật đếm số lượng bong bóng
+        function updateAllParaBadges() {
+            for (let p = 1; p <= totalParagraphs; p++) {
+                const key = `comments_${truyen}_${chuong}_para_${p}`;
+                const comments = JSON.parse(localStorage.getItem(key) || '[]');
+                const badge = document.getElementById(`badge-${p}`);
+                if (badge) {
+                    badge.innerText = comments.length;
+                    if (comments.length > 0) {
+                        badge.classList.add('has-comments');
+                    } else {
+                        badge.classList.remove('has-comments');
+                    }
+                }
+            }
+        }
+
+        // --- 2. XỬ LÝ BÌNH LUẬN TOÀN BỘ CHƯƠNG ---
         const nameInput = document.getElementById('comment-name');
         const commentInput = document.getElementById('comment-input');
         const commentSubmit = document.getElementById('comment-submit');
         const commentsList = document.getElementById('comments-list');
         const noComments = document.getElementById('no-comments');
 
-        // Tự động kiểm tra Đăng nhập đồng bộ từ Trang Chủ
+        // Đồng bộ Đăng nhập ngoài Trang Chủ
         const savedUser = localStorage.getItem('site_user_nickname');
         if(savedUser) {
             nameInput.value = savedUser;
-            nameInput.disabled = true; // Khóa không cho đổi tên bậy bạ
+            nameInput.disabled = true;
         }
 
         function loadComments() {
             let comments = JSON.parse(localStorage.getItem(commentStorageKey) || '[]');
-            
-            // Đồng bộ ID cho bình luận cũ nếu chưa có
             let modified = false;
             comments = comments.map(c => {
                 if (!c.id) { c.id = Math.floor(Math.random() * 10000000); modified = true; }
@@ -244,14 +509,11 @@
 
         function deleteComment(id) {
             if(!confirm("Bạn có chắc chắn muốn xóa bình luận này không?")) return;
-            
             let comments = JSON.parse(localStorage.getItem(commentStorageKey) || '[]');
             comments = comments.filter(c => c.id !== id);
             localStorage.setItem(commentStorageKey, JSON.stringify(comments));
-            
             const commentEl = document.getElementById('comment-' + id);
             if(commentEl) commentEl.remove();
-            
             if(comments.length === 0) noComments.style.display = 'block';
         }
 
